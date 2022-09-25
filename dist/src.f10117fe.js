@@ -129,19 +129,33 @@ var User =
 /** @class */
 function () {
   function User(data) {
-    this.data = data;
+    this.data = data; // act as an eventBank for the on method
+
+    this.events = {}; // we use key:string when we REALLY do not know what properties will be passed
   }
+
+  ;
 
   User.prototype.get = function (propName) {
     return this.data[propName];
   };
 
+  ;
+
   User.prototype.set = function (update) {
     Object.assign(this.data, update);
   };
 
-  User.prototype.on = function (eventName, callback) {};
+  ;
 
+  User.prototype.on = function (eventName, callback) {
+    var handlers = this.events[eventName] || []; // assign events OR an empty array
+
+    handlers.push(callback);
+    this.events[eventName] = handlers;
+  };
+
+  ;
   return User;
 }();
 
