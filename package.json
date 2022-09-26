@@ -1,0 +1,25 @@
+{
+  "name": "myframework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:db": "json-server -w db.json",
+    "start:parcel": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RiderCogswell/myframework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RiderCogswell/myframework/issues"
+  },
+  "homepage": "https://github.com/RiderCogswell/myframework#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "json-server": "^0.17.0"
+  }
+}
