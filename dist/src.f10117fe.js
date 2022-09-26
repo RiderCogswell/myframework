@@ -4563,9 +4563,7 @@ var User =
 /** @class */
 function () {
   function User(data) {
-    this.data = data; // act as an eventBank for the on method
-
-    this.events = {}; // we use key:string when we REALLY do not know what properties will be passed
+    this.data = data;
   }
 
   ;
@@ -4581,27 +4579,6 @@ function () {
   };
 
   ;
-
-  User.prototype.on = function (eventName, callback) {
-    var handlers = this.events[eventName] || []; // assign events OR an empty array
-
-    handlers.push(callback);
-    this.events[eventName] = handlers;
-  };
-
-  ;
-
-  User.prototype.trigger = function (eventName) {
-    var handlers = this.events[eventName];
-
-    if (!handlers || handlers.length === 0) {
-      return;
-    }
-
-    handlers.forEach(function (callback) {
-      callback();
-    });
-  };
 
   User.prototype.fetch = function () {
     var _this = this;
