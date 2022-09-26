@@ -170,11 +170,10 @@ Object.defineProperty(exports, "__esModule", {
 var User_1 = require("./models/User");
 
 var user = new User_1.User({});
-user.set({
-  age: 343
-});
-console.log(user.get('name'));
-console.log(user.get('age'));
+user.on('change', function () {});
+user.on('change', function () {});
+user.on('change', function () {});
+console.log(user);
 },{"./models/User":"src/models/User.ts"}],"../../../.nvm/versions/node/v18.3.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
