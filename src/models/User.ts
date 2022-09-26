@@ -1,6 +1,7 @@
 interface UserProps{
   name?: string;
   age?: number;
+  id?: number;
 }
 
 type Callback = () => void // type alias
