@@ -5,4 +5,4 @@
 ## Contribution
 Made with ❤️ by [Rider Cogswell](https://github.com/RiderCogswell)
 
-### ©️2022 Rider Cogswell &copy; 
+### ©️2022 Rider Cogswell 
