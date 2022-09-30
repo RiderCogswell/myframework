@@ -13,13 +13,4 @@ export class User  {
   public events: Eventing = new Eventing(); // hardcoded poor approach
   public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl) // pass in UserProps to the sync function
 
-  constructor(private data: UserProps) {};
-
-  get(propName: string): (number | string) {
-    return this.data[propName]
-  };
-
-  set(update: UserProps): void {
-    Object.assign(this.data, update);
-  };
 }
