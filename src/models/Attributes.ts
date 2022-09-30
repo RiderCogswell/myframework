@@ -1,8 +1,8 @@
 export class Attributes<T> {
   constructor(private data: T) {};
 
-  get(propName: string): (number | string) {
-    return this.data[propName]
+  get<K extends keyof T>(key: K): T[K] { // generic constraint: K acts as a key of T, aka UserProps. SOOO, this means that we can access the keys of UserProps and 
+    return this.data[key]
   };
 
   set(update: T): void {
