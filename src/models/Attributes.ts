@@ -1,7 +1,9 @@
 export class Attributes<T> {
   constructor(private data: T) {};
-
-  get<K extends keyof T>(key: K): T[K] { // generic constraint: K acts as a key of T, aka UserProps. SOOO, this means that we can access the keys of UserProps and 
+  // generic constraint: K acts as a key of T, aka UserProps.
+  //  SOOO, this means that we can access the keys of UserProps 
+  // and use them as a type 
+  get<K extends keyof T>(key: K): T[K] { // T[K] = array[index] // TYPESCRIPT IS AWESOME!!
     return this.data[key]
   };
 
