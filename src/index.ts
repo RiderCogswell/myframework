@@ -9,4 +9,4 @@ user.on('change', () => {
   console.log('user changed');
 })
 
-user.trigger('change')
+user.set({ name: 'nejfwnwf'})
