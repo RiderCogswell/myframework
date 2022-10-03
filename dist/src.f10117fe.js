@@ -129,16 +129,16 @@ var Attributes =
 /** @class */
 function () {
   function Attributes(data) {
-    this.data = data;
+    var _this = this;
+
+    this.data = data; // generic constraint: K acts as a key of T, aka UserProps.
+    //  SOOO, this means that we can access the keys of UserProps 
+    // and use them as a type 
+
+    this.get = function (key) {
+      return _this.data[key];
+    };
   }
-
-  ; // generic constraint: K acts as a key of T, aka UserProps.
-  //  SOOO, this means that we can access the keys of UserProps 
-  // and use them as a type 
-
-  Attributes.prototype.get = function (key) {
-    return this.data[key];
-  };
 
   ;
 
@@ -163,30 +163,30 @@ var Eventing =
 /** @class */
 function () {
   function Eventing() {
-    // act as an eventBank for the on method
+    var _this = this; // act as an eventBank for the on method
+
+
     this.events = {}; // we use key:string when we REALLY do not know what properties will be passed
+
+    this.on = function (eventName, callback) {
+      var handlers = _this.events[eventName] || []; // assign events OR an empty array
+
+      handlers.push(callback);
+      _this.events[eventName] = handlers;
+    };
+
+    this.trigger = function (eventName) {
+      var handlers = _this.events[eventName];
+
+      if (!handlers || handlers.length === 0) {
+        return;
+      }
+
+      handlers.forEach(function (callback) {
+        callback();
+      });
+    };
   }
-
-  Eventing.prototype.on = function (eventName, callback) {
-    var handlers = this.events[eventName] || []; // assign events OR an empty array
-
-    handlers.push(callback);
-    this.events[eventName] = handlers;
-  };
-
-  ;
-
-  Eventing.prototype.trigger = function (eventName) {
-    var handlers = this.events[eventName];
-
-    if (!handlers || handlers.length === 0) {
-      return;
-    }
-
-    handlers.forEach(function (callback) {
-      callback();
-    });
-  };
 
   return Eventing;
 }();
@@ -4694,6 +4694,20 @@ function () {
     enumerable: false,
     configurable: true
   });
+  Object.defineProperty(User.prototype, "trigger", {
+    get: function get() {
+      return this.events.trigger;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(User.prototype, "get", {
+    get: function get() {
+      return this.attributes.get;
+    },
+    enumerable: false,
+    configurable: true
+  });
   return User;
 }();
 
@@ -4711,9 +4725,11 @@ var user = new User_1.User({
   name: 'jdhsd',
   age: 359325235353232
 });
+console.log(user.get('name'));
 user.on('change', function () {
   console.log('user changed');
 });
+user.trigger('change');
 },{"./models/User":"src/models/User.ts"}],"../../../.nvm/versions/node/v18.3.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
