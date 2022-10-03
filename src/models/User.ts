@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { Attributes } from './Attributes';
 import { Eventing } from './Eventing'
 import { Sync } from './Sync';
@@ -8,7 +9,7 @@ export interface UserProps{
   id?: number;
 }                 
 
-const rootUrl = 'http://localhost/3000/users';
+const rootUrl = 'http://localhost:3000/users';
 
 export class User  {
   public events: Eventing = new Eventing(); // hardcoded poor approach
@@ -34,5 +35,19 @@ export class User  {
   set(update: UserProps): void {
     this.attributes.set(update); 
     this.events.trigger('change');
+  }
+
+  fetch(): void {
+    const id = this.get('id');
+
+    if (typeof id !== 'number') {
+      throw new Error('Cannot fetch without an id')
+    }
+
+    this.sync.fetch(id).then((response: AxiosResponse): void => {
+      this.set(response.data); // reference the set method on this page, so it also triggers change
+    }).catch(error => {
+      console.log(error.response);
+    })
   }
 }
