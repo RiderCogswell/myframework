@@ -46,8 +46,14 @@ export class User  {
 
     this.sync.fetch(id).then((response: AxiosResponse): void => {
       this.set(response.data); // reference the set method on this page, so it also triggers change
-    }).catch(error => {
-      console.log(error.response);
     })
+  }
+
+  save(): void {
+    this.sync.save(this.attributes.getAll())
+      .then((response: AxiosResponse): void => {
+        this.trigger('save');
+      })
+      .catch(() => this.trigger('error'));
   }
 }
